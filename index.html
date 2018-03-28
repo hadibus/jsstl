@@ -14,13 +14,15 @@
         </style>
     </head>
     <body>
+        <canvas id="myCanvas"></canvas>
+
         <script src="three.js"></script>
         <script src="stats.js"></script>
         <script src="detector.js"></script>
         <script>
 
             var camera, scene, renderer,
-            geometry, material, mesh, light1, stats;
+            geometry, material, mesh, light1, stats, turn;
 
             function trim (str) {
                 str = str.replace(/^\s+/, '');
@@ -221,8 +223,8 @@
                 scene = new THREE.Scene();
 
                 camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-                camera.position.z = 70;
-                camera.position.y = 0;
+                camera.position.z = 100;
+                camera.position.y = 50;
                 scene.add( camera );
 
                 var directionalLight = new THREE.DirectionalLight( 0xffffff );
@@ -256,16 +258,19 @@
                 //xhr.setRequestHeader("Content-Type","text/plain");
                 //xhr.setRequestHeader('charset', 'x-user-defined');
                 xhr.send( null );
-
-                renderer = new THREE.WebGLRenderer(); //new THREE.CanvasRenderer();
+                
+                turn = true;
+                document.getElementById('myCanvas').addEventListener("click", onClick, false);
+                renderer = new THREE.WebGLRenderer({canvas: document.getElementById('myCanvas')}); //new THREE.CanvasRenderer();
                 renderer.setSize( window.innerWidth, window.innerHeight );
-
-                document.body.appendChild( renderer.domElement );
 
                 stats = new Stats();
                 stats.domElement.style.position = 'absolute';
                 stats.domElement.style.top = '0px';
                 document.body.appendChild(stats.domElement);
+
+				//scene.addEventListener('click', function() { }, false);
+
             }
 
             function animate() {
@@ -280,13 +285,18 @@
             function render() {
 
                 //mesh.rotation.x += 0.01;
-                if (mesh) {
+                if (mesh && turn) {
                     mesh.rotation.z += 0.02;
                 }
                 //light1.position.z -= 1;
 
                 renderer.render( scene, camera );
 
+            }
+
+            function onClick()
+            {
+                turn = !turn;
             }
 
         </script>
