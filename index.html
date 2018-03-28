@@ -14,6 +14,8 @@
         </style>
     </head>
     <body>
+        <script src="slider/js/bootstrap-slider.js"></script>
+
         <canvas id="myCanvas"></canvas>
 
         <script src="three.js"></script>
@@ -22,7 +24,7 @@
         <script>
 
             var camera, scene, renderer,
-            geometry, material, mesh, light1, stats, turn;
+            geometry, material, mesh, light1, stats, turn, zOld;
 
             function trim (str) {
                 str = str.replace(/^\s+/, '');
@@ -258,7 +260,7 @@
                 //xhr.setRequestHeader("Content-Type","text/plain");
                 //xhr.setRequestHeader('charset', 'x-user-defined');
                 xhr.send( null );
-                
+                zOld = 0
                 turn = true;
                 document.getElementById('myCanvas').addEventListener("click", onClick, false);
                 renderer = new THREE.WebGLRenderer({canvas: document.getElementById('myCanvas')}); //new THREE.CanvasRenderer();
@@ -285,13 +287,15 @@
             function render() {
 
                 //mesh.rotation.x += 0.01;
+                zOld = mesh.rotation.z;
                 if (mesh && turn) {
                     mesh.rotation.z += 0.02;
                 }
                 //light1.position.z -= 1;
-
-                renderer.render( scene, camera );
-
+                if (zOld != mesh.rotation.z)
+                {
+                    renderer.render( scene, camera );
+                }
             }
 
             function onClick()

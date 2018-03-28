@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "nouislider": "^11.0.3",
+    "rc-slider": "^8.6.1"
+  },
+  "name": "jsstl",
+  "description": "jsstl =====",
+  "version": "1.0.0",
+  "main": "index.html",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadibus/jsstl.git"
+  },
+  "keywords": [
+    "3D",
+    "editor",
+    "threejs"
+  ],
+  "author": "chris jenkins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hadibus/jsstl/issues"
+  },
+  "homepage": "https://github.com/hadibus/jsstl#readme"
+}
